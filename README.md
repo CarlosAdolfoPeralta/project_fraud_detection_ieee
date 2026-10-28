@@ -1,6 +1,6 @@
 # Detección de fraude en transacciones (IEEE-CIS)
 
-Proyecto de detección de fraude con datos reales de e-commerce, enfocado en **validación temporal**, **medición rigurosa** (varias semillas, resultados negativos incluidos) y **traducción de la métrica a costo de negocio**.
+Proyecto de detección de fraude con datos reales de e-commerce, enfocado en **validación temporal**, **medición rigurosa** (varias semillas, resultados negativos incluidos) y **traducción de la métrica a costo de negocio**. Este proyecto fue realizado con asistencia de LLMs.
 
 **Autor:** Carlos Adolfo Peralta · [LinkedIn](https://www.linkedin.com/in/carlosperalta1993/) · [GitHub](https://github.com/CarlosAdolfoPeralta)
 
