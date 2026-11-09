@@ -47,9 +47,9 @@ def evaluate_by_segment(df: pd.DataFrame, y_score, segment_col: str, target: str
         rows.append(
             {
                 segment_col: seg,
-                "filas": len(g),
-                "fraudes": int(g["y"].sum()),
-                "tasa_fraude_%": 100 * g["y"].mean(),
+                "rows": len(g),
+                "frauds": int(g["y"].sum()),
+                "rate_fraud_%": 100 * g["y"].mean(),
                 "auc_pr": average_precision_score(g["y"], g["score"]),
                 "auc_roc": roc_auc_score(g["y"], g["score"]),
             }
@@ -110,12 +110,12 @@ def cost_at_threshold(y_true, scores, amounts, review_cost: float, threshold: fl
     no_model = float(a[y == 1].sum())          # no revisar nada
     review_all = review_cost * len(y)          # revisar todo
     return {
-        "umbral": threshold,
-        "alertas_%": 100 * n_flagged / len(y),
+        "threshold": threshold,
+        "alerts_%": 100 * n_flagged / len(y),
         "precision": tp / n_flagged if n_flagged else 0.0,
         "recall": tp / n_fraud if n_fraud else 0.0,
-        "costo": cost,
-        "costo_sin_modelo": no_model,
-        "costo_revisar_todo": review_all,
-        "ahorro_vs_sin_modelo_%": 100 * (1 - cost / no_model) if no_model else 0.0,
+        "cost": cost,
+        "cost_no_model": no_model,
+        "cost_review_all": review_all,
+        "savings_vs_no_model_%": 100 * (1 - cost / no_model) if no_model else 0.0,
     }

@@ -47,13 +47,13 @@ def summarize_splits(**splits: pd.DataFrame) -> pd.DataFrame:
         rows.append(
             {
                 "split": name,
-                "filas": len(part),
-                "% del total": 100 * len(part) / sum(len(p) for p in splits.values()),
-                "día_min": part["day"].min(),
-                "día_max": part["day"].max(),
-                "fraudes": int(part["isFraud"].sum()),
-                "tasa_fraude_%": 100 * part["isFraud"].mean(),
-                "%_con_identidad": 100 * part["has_identity"].mean(),
+                "rows": len(part),
+                "% of total": 100 * len(part) / sum(len(p) for p in splits.values()),
+                "day_min": part["day"].min(),
+                "day_max": part["day"].max(),
+                "frauds": int(part["isFraud"].sum()),
+                "fraud_rate_%": 100 * part["isFraud"].mean(),
+                "%_with_identity": 100 * part["has_identity"].mean(),
             }
         )
     return pd.DataFrame(rows).set_index("split").round(2)

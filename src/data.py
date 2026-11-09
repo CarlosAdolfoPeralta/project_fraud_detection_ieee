@@ -30,8 +30,8 @@ def reduce_mem_usage(df: pd.DataFrame, verbose: bool = True) -> pd.DataFrame:
     end_mem = df.memory_usage(deep=True).sum() / 1024**2
     if verbose:
         print(
-            f"Memoria: {start_mem:.1f} MB -> {end_mem:.1f} MB "
-            f"({100 * (start_mem - end_mem) / start_mem:.0f}% menos)"
+            f"Memory: {start_mem:.1f} MB -> {end_mem:.1f} MB "
+            f"({100 * (start_mem - end_mem) / start_mem:.0f}% lower)"
         )
     return df
 
@@ -44,9 +44,9 @@ def load_ieee(raw_dir: Path = RAW_DIR, merge: bool = True):
     tenía información de identidad. Si merge=False devuelve ambos por separado.
     """
     raw_dir = Path(raw_dir)
-    print("Cargando train_transaction.csv ...")
+    print("Loading train_transaction.csv ...")
     trans = reduce_mem_usage(pd.read_csv(raw_dir / "train_transaction.csv"))
-    print("Cargando train_identity.csv ...")
+    print("Loading train_identity.csv ...")
     ident = reduce_mem_usage(pd.read_csv(raw_dir / "train_identity.csv"))
 
     if not merge:
@@ -56,7 +56,7 @@ def load_ieee(raw_dir: Path = RAW_DIR, merge: bool = True):
     ident["has_identity"] = 1
     df = trans.merge(ident, on="TransactionID", how="left")
     df["has_identity"] = df["has_identity"].fillna(0).astype(np.int8)
-    print(f"Dataset final: {df.shape[0]:,} filas x {df.shape[1]} columnas")
+    print(f"Final Dataset: {df.shape[0]:,} rows x {df.shape[1]} columns")
     return df
 
 
@@ -65,7 +65,7 @@ def save_processed(df: pd.DataFrame, name: str = "train_merged.parquet") -> Path
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     path = PROCESSED_DIR / name
     df.to_parquet(path, index=False)
-    print(f"Guardado en {path}")
+    print(f"Saved in {path}")
     return path
 
 
